@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Service service = new Service();
 
-        service.cadastro();
+        service.cadastrar();
+        service.imprimirTodos();
     }
 }

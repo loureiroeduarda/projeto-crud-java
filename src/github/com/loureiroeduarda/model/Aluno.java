@@ -17,4 +17,16 @@ public class Aluno extends Pessoa {
     public void setNota(Double nota) {
         this.nota = nota;
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nota=" + nota +
+                ", nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", dataCadastro=" + dataCadastro +
+                ", dataAlteracao=" + dataAlteracao +
+                '}';
+    }
 }

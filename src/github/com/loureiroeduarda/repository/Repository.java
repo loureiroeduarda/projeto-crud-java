@@ -4,6 +4,7 @@ import github.com.loureiroeduarda.model.Aluno;
 import github.com.loureiroeduarda.model.Pessoa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Repository {
     private final ArrayList<Pessoa> bancoDeDados;
@@ -20,10 +21,7 @@ public class Repository {
         this.bancoDeDados.add(aluno);
     }
 
-    @Override
-    public String toString() {
-        return "Repository{" +
-                "bancoDeDados=" + bancoDeDados +
-                '}';
+    public List<Pessoa> listarTodos() {
+        return this.bancoDeDados;
     }
 }

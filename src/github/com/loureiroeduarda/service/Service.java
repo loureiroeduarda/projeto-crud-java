@@ -16,7 +16,7 @@ public class Service {
         this.repository = new Repository();
     }
 
-    public void cadastro() {
+    public void cadastrar() {
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
         System.out.println("Digite o número de telefone: ");
@@ -35,6 +35,12 @@ public class Service {
 
             Aluno aluno = new Aluno(nome, telefone, dataNascimento, dataCadastro, null, nota);
             repository.cadastrarAluno(aluno);
+        }
+    }
+
+    public void imprimirTodos() {
+        for(Pessoa pessoa : repository.listarTodos()) {
+            System.out.println(pessoa);
         }
     }
 }
