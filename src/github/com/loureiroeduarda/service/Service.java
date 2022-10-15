@@ -50,4 +50,8 @@ public class Service {
         repository.listarPessoas().forEach(System.out::println);
     }
 
+    public void imprimirAlunos() {
+        System.out.println("Lista de alunos cadastrados: ");
+        repository.listarAlunos().forEach(System.out::println);
+    }
 }

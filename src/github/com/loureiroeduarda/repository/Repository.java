@@ -29,4 +29,8 @@ public class Repository {
     public List<Pessoa> listarPessoas() {
         return bancoDeDados.stream().filter(p -> !(p instanceof Aluno)).collect(Collectors.toList());
     }
+
+    public List<Pessoa> listarAlunos() {
+        return bancoDeDados.stream().filter(a -> a instanceof Aluno).collect(Collectors.toList());
+    }
 }
