@@ -5,6 +5,7 @@ import github.com.loureiroeduarda.model.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Repository {
     private final ArrayList<Pessoa> bancoDeDados;
@@ -23,5 +24,9 @@ public class Repository {
 
     public List<Pessoa> listarTodos() {
         return this.bancoDeDados;
+    }
+
+    public List<Pessoa> listarPessoas() {
+        return bancoDeDados.stream().filter(p -> !(p instanceof Aluno)).collect(Collectors.toList());
     }
 }

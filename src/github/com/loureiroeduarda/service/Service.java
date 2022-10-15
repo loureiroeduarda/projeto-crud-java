@@ -6,6 +6,7 @@ import github.com.loureiroeduarda.repository.Repository;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Service {
     private final Scanner sc;
@@ -43,4 +44,10 @@ public class Service {
             System.out.println(pessoa);
         }
     }
+
+    public void imprimirPessoas() {
+        System.out.println("Lista de pessoas cadastradas: ");
+        repository.listarPessoas().forEach(System.out::println);
+    }
+
 }

@@ -8,5 +8,6 @@ public class Main {
 
         service.cadastrar();
         service.imprimirTodos();
+        service.imprimirPessoas();
     }
 }
