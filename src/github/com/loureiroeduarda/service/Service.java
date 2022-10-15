@@ -6,7 +6,6 @@ import github.com.loureiroeduarda.repository.Repository;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Service {
     private final Scanner sc;
@@ -40,7 +39,7 @@ public class Service {
     }
 
     public void imprimirTodos() {
-        for(Pessoa pessoa : repository.listarTodos()) {
+        for (Pessoa pessoa : repository.listarTodos()) {
             System.out.println(pessoa);
         }
     }
