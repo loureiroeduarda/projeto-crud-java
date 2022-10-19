@@ -49,4 +49,8 @@ public class Repository {
             }
         }
     }
+
+    public void deletar(Pessoa pessoa) {
+        bancoDeDados.remove(pessoa);
+    }
 }

@@ -34,7 +34,6 @@ public class Service {
         } else {
             System.out.println("Digite a nota final do curso: ");
             Double nota = sc.nextDouble();
-            sc.nextLine();
 
             Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
             repository.cadastrarAluno(aluno);
@@ -81,6 +80,17 @@ public class Service {
                 Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, pessoaOriginal.getDataCadastro(), dataAlteracao);
                 repository.atualizar(pessoa);
             }
+        } else {
+            System.out.println("CPF não cadastrado! Tente novamente!");
+        }
+    }
+
+    public void deletarCadastro() {
+        System.out.println("Digite o CPF que deseja excluir: ");
+        String cpf = sc.nextLine();
+        Pessoa pessoa = repository.buscarPorCpf(cpf);
+        if (pessoa != null) {
+            repository.deletar(pessoa);
         } else {
             System.out.println("CPF não cadastrado! Tente novamente!");
         }
