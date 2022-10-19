@@ -4,13 +4,15 @@ import java.time.LocalDate;
 
 public class Pessoa {
     protected String nome;
+    protected String cpf;
     protected String telefone;
     protected LocalDate dataNascimento;
     protected LocalDate dataCadastro;
     protected LocalDate dataAlteracao;
 
-    public Pessoa(String nome, String telefone, LocalDate dataNascimento, LocalDate dataCadastro, LocalDate dataAlteracao) {
+    public Pessoa(String nome, String cpf, String telefone, LocalDate dataNascimento, LocalDate dataCadastro, LocalDate dataAlteracao) {
         this.nome = nome;
+        this.cpf = cpf;
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
         this.dataCadastro = dataCadastro;
@@ -23,6 +25,14 @@ public class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getTelefone() {
@@ -61,6 +71,7 @@ public class Pessoa {
     public String toString() {
         return "Pessoa{" +
                 "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", dataCadastro=" + dataCadastro +

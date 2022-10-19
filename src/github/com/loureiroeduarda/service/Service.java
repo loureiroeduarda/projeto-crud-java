@@ -19,6 +19,8 @@ public class Service {
     public void cadastrar() {
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
+        System.out.println("Digite o CPF: ");
+        String cpf = sc.nextLine();
         System.out.println("Digite o número de telefone: ");
         String telefone = sc.nextLine();
         System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
@@ -27,15 +29,17 @@ public class Service {
         System.out.println("Deseja cadastrar a nota final do curso? Digite S para SIM e N para NÃO!");
         String resposta = sc.next();
         if (resposta.equals("N")) {
-            Pessoa pessoa = new Pessoa(nome, telefone, dataNascimento, dataCadastro, null);
+            Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, dataCadastro, null);
             repository.cadastrarPessoa(pessoa);
         } else {
             System.out.println("Digite a nota final do curso: ");
             Double nota = sc.nextDouble();
+            sc.nextLine();
 
-            Aluno aluno = new Aluno(nome, telefone, dataNascimento, dataCadastro, null, nota);
+            Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
             repository.cadastrarAluno(aluno);
         }
+        sc.nextLine();
     }
 
     public void imprimirTodos() {
@@ -52,5 +56,33 @@ public class Service {
     public void imprimirAlunos() {
         System.out.println("Lista de alunos cadastrados: ");
         repository.listarAlunos().forEach(System.out::println);
+    }
+
+    public void atualizarCadastro() {
+        System.out.println("Digite o CPF: ");
+        String cpf = sc.nextLine();
+        Pessoa pessoaOriginal = repository.buscarPorCpf(cpf);
+        if (pessoaOriginal != null) {
+            System.out.println("Digite o nome: ");
+            String nome = sc.nextLine();
+            System.out.println("Digite o número de telefone: ");
+            String telefone = sc.nextLine();
+            System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
+            LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
+            LocalDate dataAlteracao = LocalDate.now();
+            if (pessoaOriginal instanceof Aluno) {
+                System.out.println("Digite a nota final do curso: ");
+                Double nota = sc.nextDouble();
+                sc.nextLine();
+
+                Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, pessoaOriginal.getDataCadastro(), dataAlteracao, nota);
+                repository.atualizar(aluno);
+            } else {
+                Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, pessoaOriginal.getDataCadastro(), dataAlteracao);
+                repository.atualizar(pessoa);
+            }
+        } else {
+            System.out.println("CPF não cadastrado! Tente novamente!");
+        }
     }
 }

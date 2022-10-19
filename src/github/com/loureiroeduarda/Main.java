@@ -8,7 +8,9 @@ public class Main {
 
         service.cadastrar();
         service.imprimirTodos();
-        service.imprimirPessoas();
-        service.imprimirAlunos();
+//        service.imprimirPessoas();
+//        service.imprimirAlunos();
+        service.atualizarCadastro();
+        service.imprimirTodos();
     }
 }
