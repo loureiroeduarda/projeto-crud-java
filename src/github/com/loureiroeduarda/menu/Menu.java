@@ -29,9 +29,10 @@ public class Menu {
             System.out.println("0 - Encerrar o sistema");
             System.out.println("===============================================");
             int opcaoEscolhida = sc.nextInt();
+            sc.nextLine();
             switch (opcaoEscolhida) {
                 case 1:
-                    service.cadastrar();
+                    service.cadastrar(sc);
                     break;
                 case 2:
                     service.imprimirTodos();
@@ -43,10 +44,10 @@ public class Menu {
                     service.imprimirAlunos();
                     break;
                 case 5:
-                    service.atualizarCadastro();
+                    service.atualizarCadastro(sc);
                     break;
                 case 6:
-                    service.deletarCadastro();
+                    service.deletarCadastro(sc);
                     break;
                 case 0:
                     continua = false;

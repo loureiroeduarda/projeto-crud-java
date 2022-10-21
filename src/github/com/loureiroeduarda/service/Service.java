@@ -8,35 +8,37 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Service {
-    private final Scanner sc;
     private final Repository repository;
 
     public Service() {
-        this.sc = new Scanner(System.in);
         this.repository = new Repository();
     }
 
-    public void cadastrar() {
+    public void cadastrar(Scanner sc) {
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
         System.out.println("Digite o CPF: ");
         String cpf = sc.nextLine();
-        System.out.println("Digite o número de telefone: ");
-        String telefone = sc.nextLine();
-        System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
-        LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
-        LocalDate dataCadastro = LocalDate.now();
-        System.out.println("Deseja cadastrar a nota final do curso? Digite S para SIM e N para NÃO!");
-        String resposta = sc.next();
-        if (resposta.equals("N")) {
-            Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, dataCadastro, null);
-            repository.cadastrarPessoa(pessoa);
+        if (repository.buscarPorCpf(cpf) != null) {
+            System.out.println("O CPF inserido já está cadastrado! Tente novamente");
         } else {
-            System.out.println("Digite a nota final do curso: ");
-            Double nota = sc.nextDouble();
+            System.out.println("Digite o número de telefone: ");
+            String telefone = sc.nextLine();
+            System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
+            LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
+            LocalDate dataCadastro = LocalDate.now();
+            System.out.println("Deseja cadastrar a nota final do curso? Digite S para SIM e N para NÃO!");
+            String resposta = sc.next();
+            if (resposta.equals("N")) {
+                Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, dataCadastro, null);
+                repository.cadastrarPessoa(pessoa);
+            } else {
+                System.out.println("Digite a nota final do curso: ");
+                Double nota = sc.nextDouble();
 
-            Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
-            repository.cadastrarAluno(aluno);
+                Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
+                repository.cadastrarAluno(aluno);
+            }
         }
         sc.nextLine();
     }
@@ -58,7 +60,7 @@ public class Service {
         repository.listarAlunos().forEach(System.out::println);
     }
 
-    public void atualizarCadastro() {
+    public void atualizarCadastro(Scanner sc) {
         System.out.println("Digite o CPF que deseja atualizar: ");
         String cpf = sc.nextLine();
         Pessoa pessoaOriginal = repository.buscarPorCpf(cpf);
@@ -86,7 +88,7 @@ public class Service {
         }
     }
 
-    public void deletarCadastro() {
+    public void deletarCadastro(Scanner sc) {
         System.out.println("Digite o CPF que deseja excluir: ");
         String cpf = sc.nextLine();
         Pessoa pessoa = repository.buscarPorCpf(cpf);
