@@ -42,23 +42,24 @@ public class Service {
     }
 
     public void imprimirTodos() {
+        System.out.println("Lista de todos os cadastros efetuados: ");
         for (Pessoa pessoa : repository.listarTodos()) {
             System.out.println(pessoa);
         }
     }
 
     public void imprimirPessoas() {
-        System.out.println("Lista de pessoas cadastradas: ");
+        System.out.println("Lista de todas as pessoas cadastradas: ");
         repository.listarPessoas().forEach(System.out::println);
     }
 
     public void imprimirAlunos() {
-        System.out.println("Lista de alunos cadastrados: ");
+        System.out.println("Lista de todos os alunos cadastrados: ");
         repository.listarAlunos().forEach(System.out::println);
     }
 
     public void atualizarCadastro() {
-        System.out.println("Digite o CPF: ");
+        System.out.println("Digite o CPF que deseja atualizar: ");
         String cpf = sc.nextLine();
         Pessoa pessoaOriginal = repository.buscarPorCpf(cpf);
         if (pessoaOriginal != null) {

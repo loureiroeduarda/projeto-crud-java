@@ -1,17 +1,12 @@
 package github.com.loureiroeduarda;
 
+import github.com.loureiroeduarda.menu.Menu;
 import github.com.loureiroeduarda.service.Service;
 
 public class Main {
     public static void main(String[] args) {
-        Service service = new Service();
+        Menu menu = new Menu();
 
-        service.cadastrar();
-        service.imprimirTodos();
-        service.imprimirPessoas();
-        service.imprimirAlunos();
-        service.atualizarCadastro();
-        service.deletarCadastro();
-        service.imprimirTodos();
+        menu.menu();
     }
 }
