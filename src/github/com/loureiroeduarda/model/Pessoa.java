@@ -69,13 +69,15 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", dataCadastro=" + dataCadastro +
-                ", dataAlteracao=" + dataAlteracao +
-                '}';
+        String objeto = "Nome: " + nome + " - " +
+                "CPF: " + cpf + " - " +
+                "Telefone: " + telefone + " - " +
+                "Data de nascimento: " + dataNascimento + " - " +
+                "Data de cadastro: " + dataCadastro;
+
+        if (dataAlteracao == null) {
+            return objeto;
+        }
+        return objeto + " - " + "Data da última alteração: " + dataAlteracao;
     }
 }

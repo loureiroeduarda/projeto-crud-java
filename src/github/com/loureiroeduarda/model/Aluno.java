@@ -20,14 +20,16 @@ public class Aluno extends Pessoa {
 
     @Override
     public String toString() {
-        return "Aluno{" +
-                "nota=" + nota +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", dataCadastro=" + dataCadastro +
-                ", dataAlteracao=" + dataAlteracao +
-                '}';
+        String objeto = "Nome: " + nome + " - " +
+                "CPF: " + cpf + " - " +
+                "Telefone: " + telefone + " - " +
+                "Nota final do curso: " + nota + " - " +
+                "Data de nascimento: " + dataNascimento + " - " +
+                "Data de cadastro: " + dataCadastro;
+
+        if (dataAlteracao == null) {
+            return objeto;
+        }
+        return objeto + " - " + "Data da última alteração: " + dataAlteracao;
     }
 }
