@@ -40,14 +40,19 @@ public class Service {
             }
             if (resposta.equals("S")) {
                 System.out.println("Digite a nota final do curso: ");
-                Double nota = sc.nextDouble();
+                sc.nextLine();
+                String nt = sc.nextLine();
+                Double nota = converterNota(nt);
 
                 Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
                 repository.cadastrarAluno(aluno);
                 System.out.println("Aluno cadastrado com sucesso!!");
             }
         }
-        sc.nextLine();
+    }
+
+    private Double converterNota(String nota) {
+        return Double.parseDouble(nota.replaceAll(",", "."));
     }
 
     public void imprimirTodos() {
@@ -81,8 +86,8 @@ public class Service {
             LocalDate dataAlteracao = LocalDate.now();
             if (pessoaOriginal instanceof Aluno) {
                 System.out.println("Digite a nota final do curso: ");
-                Double nota = sc.nextDouble();
-                sc.nextLine();
+                String nt = sc.nextLine();
+                Double nota = converterNota(nt);
 
                 Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, pessoaOriginal.getDataCadastro(), dataAlteracao, nota);
                 repository.atualizar(aluno);
