@@ -35,16 +35,16 @@ public class Repository {
     }
 
     public Pessoa buscarPorCpf(String cpf) {
-        for(Pessoa pessoa : bancoDeDados) {
-            if(pessoa.getCpf().equals(cpf))
+        for (Pessoa pessoa : bancoDeDados) {
+            if (pessoa.getCpf().equals(cpf))
                 return pessoa;
         }
         return null;
     }
 
     public void atualizar(Pessoa pessoaAtualizada) {
-        for(int i = 0; i < bancoDeDados.size(); i++){
-            if(bancoDeDados.get(i).getCpf().equals(pessoaAtualizada.getCpf())){
+        for (int i = 0; i < bancoDeDados.size(); i++) {
+            if (bancoDeDados.get(i).getCpf().equals(pessoaAtualizada.getCpf())) {
                 bancoDeDados.set(i, pessoaAtualizada);
             }
         }

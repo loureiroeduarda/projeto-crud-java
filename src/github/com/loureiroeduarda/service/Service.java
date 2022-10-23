@@ -28,16 +28,23 @@ public class Service {
             LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
             LocalDate dataCadastro = LocalDate.now();
             System.out.println("Deseja cadastrar a nota final do curso? Digite S para SIM e N para NÃO!");
-            String resposta = sc.next();
+            String resposta = sc.next().toUpperCase();
+            while (!(resposta.equals("N") || resposta.equals("S"))) {
+                System.out.println("Opção inválida! Tente Novamente!!");
+                resposta = sc.next().toUpperCase();
+            }
             if (resposta.equals("N")) {
                 Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, dataCadastro, null);
                 repository.cadastrarPessoa(pessoa);
-            } else {
+                System.out.println("Pessoa cadastrada com sucesso!!");
+            }
+            if (resposta.equals("S")) {
                 System.out.println("Digite a nota final do curso: ");
                 Double nota = sc.nextDouble();
 
                 Aluno aluno = new Aluno(nome, cpf, telefone, dataNascimento, dataCadastro, null, nota);
                 repository.cadastrarAluno(aluno);
+                System.out.println("Aluno cadastrado com sucesso!!");
             }
         }
         sc.nextLine();
@@ -83,6 +90,7 @@ public class Service {
                 Pessoa pessoa = new Pessoa(nome, cpf, telefone, dataNascimento, pessoaOriginal.getDataCadastro(), dataAlteracao);
                 repository.atualizar(pessoa);
             }
+            System.out.println("Cadastro atualizado com sucesso!!");
         } else {
             System.out.println("CPF não cadastrado! Tente novamente!");
         }
@@ -94,6 +102,7 @@ public class Service {
         Pessoa pessoa = repository.buscarPorCpf(cpf);
         if (pessoa != null) {
             repository.deletar(pessoa);
+            System.out.println("Cadastro excluído com sucesso!!");
         } else {
             System.out.println("CPF não cadastrado! Tente novamente!");
         }
