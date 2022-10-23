@@ -5,6 +5,8 @@ import github.com.loureiroeduarda.model.Pessoa;
 import github.com.loureiroeduarda.repository.Repository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Service {
@@ -17,15 +19,14 @@ public class Service {
     public void cadastrar(Scanner sc) {
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
-        System.out.println("Digite o CPF: ");
+        System.out.println("Digite o CPF (formato xxx.xxx.xxx-xx): ");
         String cpf = sc.nextLine();
         if (repository.buscarPorCpf(cpf) != null) {
             System.out.println("O CPF inserido já está cadastrado! Tente novamente");
         } else {
-            System.out.println("Digite o número de telefone: ");
+            System.out.println("Digite o número de telefone (formato (DD) xxxxx-xxxx: ");
             String telefone = sc.nextLine();
-            System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
-            LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
+            LocalDate dataNascimento = lerDataDeNascimento(sc);
             LocalDate dataCadastro = LocalDate.now();
             System.out.println("Deseja cadastrar a nota final do curso? Digite S para SIM e N para NÃO!");
             String resposta = sc.next().toUpperCase();
@@ -55,6 +56,25 @@ public class Service {
         return Double.parseDouble(nota.replaceAll(",", "."));
     }
 
+    private LocalDate lerDataDeNascimento(Scanner sc) {
+        System.out.println("Digite a data de nascimento (formato DD/MM/AAAA): ");
+        String data = sc.nextLine();
+        while (formatarData(data) == null) {
+            System.out.println("Data de nascimento inválida! Digite novamente (formato DD/MM/AAAA):");
+            data = sc.nextLine();
+        }
+        return formatarData(data);
+    }
+
+    private LocalDate formatarData(String data) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return LocalDate.parse(data, formatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
     public void imprimirTodos() {
         System.out.println("Lista de todos os cadastros efetuados: ");
         for (Pessoa pessoa : repository.listarTodos()) {
@@ -73,16 +93,15 @@ public class Service {
     }
 
     public void atualizarCadastro(Scanner sc) {
-        System.out.println("Digite o CPF que deseja atualizar: ");
+        System.out.println("Digite o CPF que deseja atualizar (formato xxx.xxx.xxx-xx): ");
         String cpf = sc.nextLine();
         Pessoa pessoaOriginal = repository.buscarPorCpf(cpf);
         if (pessoaOriginal != null) {
             System.out.println("Digite o nome: ");
             String nome = sc.nextLine();
-            System.out.println("Digite o número de telefone: ");
+            System.out.println("Digite o número de telefone (formato (DD) xxxxx-xxxx: ");
             String telefone = sc.nextLine();
-            System.out.println("Digite a data de nascimento (formato ano-mês-dia): ");
-            LocalDate dataNascimento = LocalDate.parse(sc.nextLine());
+            LocalDate dataNascimento = lerDataDeNascimento(sc);
             LocalDate dataAlteracao = LocalDate.now();
             if (pessoaOriginal instanceof Aluno) {
                 System.out.println("Digite a nota final do curso: ");
